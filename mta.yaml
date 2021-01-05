@@ -7,10 +7,26 @@ modules:
    type: hdb
    path: DB2
    requires:
-    - name: hdi_DB2
+    - name: hdi_DB2_2
+
+ 
+
+ 
 
 resources:
  - name: hdi_DB2
    properties:
       hdi-container-name: ${service-name}
    type: com.sap.xs.hdi-container
+
+ - name: hdi_Tasks
+   properties:
+      hdi-container-name_2: ${service-name}
+   type: com.sap.xs.hdi-container
+
+
+ - name: hdi_DB2_2
+   properties:
+      hdi-container-name_3: ${service-name}
+   type: com.sap.xs.hdi-container
+
