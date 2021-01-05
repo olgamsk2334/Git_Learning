@@ -1,0 +1,17 @@
+COLUMN TABLE "USERS"(
+	"ID"				INTEGER CS_INT	NOT NULL 	COMMENT 'Internal Identifier',
+	"FIRSTNAME"			NVARCHAR(20)				COMMENT 'User Firstname',
+	"LASTNAME"			NVARCHAR(20)    			COMMENT 'User Lastname',
+	"EMAIL"				NVARCHAR(50) 				COMMENT 'User E-mail',
+	"SEX"				NVARCHAR(1) 	NOT NULL	COMMENT 'User Sex',
+	"TEAM"   			INTEGER CS_INT  NOT NULL	COMMENT 'User Team',
+
+	PRIMARY KEY ("ID")
+	
+) WITH ASSOCIATIONS( 
+	JOIN "TASKS" AS "T" ON "T"."ID" = "ID"
+)
+
+UNLOAD PRIORITY 5 AUTO MERGE
+COMMENT 'Table with users list';
+	

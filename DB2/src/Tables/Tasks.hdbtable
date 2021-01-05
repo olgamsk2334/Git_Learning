@@ -1,7 +1,7 @@
 COLUMN TABLE "TASKS"(
 	"ID"				INTEGER CS_INT	NOT NULL 	COMMENT 'Internal Identifier',
 	"PROJECT"			INTEGER CS_INT  NOT NULL 	COMMENT 'Type of project',
-	"TITLE"				NVARCHAR(30)    NOT NULL 	COMMENT 'Title of project',
+	"TITLE"				NVARCHAR(40)    NOT NULL 	COMMENT 'Title of project',
 	"DESCRIPTION"		CLOB 						COMMENT 'Descripyion',
 	"STATUS"			INTEGER 		NOT NULL	COMMENT 'Status of project',
 	"ASSIGNEE"   		INTEGER     				COMMENT '', 
