@@ -3,7 +3,7 @@ COLUMN TABLE "USERS"(
 	"FIRSTNAME"			NVARCHAR(20)				COMMENT 'User Firstname',
 	"LASTNAME"			NVARCHAR(20)    			COMMENT 'User Lastname',
 	"EMAIL"				NVARCHAR(50) 				COMMENT 'User E-mail',
-	"SEX"				NVARCHAR(1) 	NOT NULL	COMMENT 'User Sex',
+	"SEX"				NVARCHAR(1) 				COMMENT 'User Sex',
 	"TEAM"   			INTEGER CS_INT  NOT NULL	COMMENT 'Link to table Team',
 
 	PRIMARY KEY ("ID")
