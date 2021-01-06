@@ -1,11 +1,10 @@
 COLUMN TABLE "STATUS_TEXT"(
 	"ID"				INTEGER CS_INT	NOT NULL 	COMMENT 'Internal Identifier',
-	"LANGU"			    NVARCHAR(2)		NOT NULL    COMMENT 'Language',
+	"LANGU"			    VARCHAR(2)		NOT NULL    COMMENT 'Language',
 	"STATUS_TEXT "		NVARCHAR(20)	            COMMENT 'Status Text',
 	PRIMARY KEY ("ID", "LANGU")
 	
 ) WITH ASSOCIATIONS( 
-	JOIN "TASKS" AS "T" ON "T"."STATUS" = "ID",
 	JOIN "STATUS" AS "S" ON "S"."ID" = "ID"
 )
 
