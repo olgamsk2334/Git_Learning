@@ -1,7 +1,7 @@
 COLUMN TABLE "STATUS_TEXT"(
 	"ID"				INTEGER CS_INT	NOT NULL 	COMMENT 'Internal Identifier',
 	"LANGU"			    VARCHAR(2)		NOT NULL    COMMENT 'Language',
-	"STATUS_TEXT "		NVARCHAR(20)	            COMMENT 'Status Text',
+	"STATUS_TEXT"		NVARCHAR(20)	            COMMENT 'Status Text',
 	PRIMARY KEY ("ID", "LANGU")
 	
 ) WITH ASSOCIATIONS( 
