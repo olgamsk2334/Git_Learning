@@ -1,0 +1,15 @@
+PROCEDURE "P_STATUS_TEXT"( 
+	IN IV_LANGU VARCHAR(2),
+	OUT ET_RESULT TABLE ("ID" INTEGER,
+			             "STATUS_TEXT" NVARCHAR(20)))
+
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   ET_RESULT = SELECT "ID",
+                       "STATUS_TEXT"
+                FROM "STATUS_TEXT"
+                WHERE "LANGU" = :IV_LANGU;
+END
