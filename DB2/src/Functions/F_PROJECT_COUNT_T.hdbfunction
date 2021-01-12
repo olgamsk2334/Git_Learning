@@ -1,0 +1,29 @@
+FUNCTION "F_PROJECT_COUNT_T"( )
+       RETURNS TABLE (
+       					"STATUS" INTEGER,
+       					"SUM_ESTIMATED_EFFORT" INTEGER
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+	DECLARE LV_I INTEGER;
+	DECLARE lv_status INTEGER;
+    DECLARE LT_INFO_PROJECTS "PROJECTS";
+    
+    LT_STATUSES = SELECT "ID"  --промежуточная таблица из селекта не объявляется
+    	   FROM "STATUS";
+   
+       FOR LV_I IN 1..RECORD_COUNT(:LT_STATUSES) DO
+    		lv_status = :LT_STATUSES."ID"[:LV_I];
+    		
+    		LT_INFO_PROJECTS_I = SELECT * FROM F_NAME_PROJECT(:lv_status);
+    		--таблицу, кот накапливает нужно объявлять
+    		--накапливаем имеющиеся данные с новыми
+    		LT_INFO_PROJECTS = select * from :LT_INFO_PROJECTS
+    		union select * from :LT_INFO_PROJECTS_I;
+   	END FOR;
+   	RETURN SELECT  "STATUS" , SUM ("ESTIMATED_EFFORT") AS "SUM_ESTIMATED_EFFORT"
+		  FROM 	:LT_INFO_PROJECTS
+		  GROUP BY "STATUS";
+    	
+END;
