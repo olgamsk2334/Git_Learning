@@ -1,0 +1,16 @@
+FUNCTION "F_TASK_INFO"( )
+       RETURNS TABLE (
+       	"TASK"				NVARCHAR(8),
+       	"PLANNED_EFFORT"	INTEGER,
+       	"USED_TIME"			NVARCHAR(8),
+    	"COMPLETED"   		NVARCHAR(8)	
+    	)
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    RETURN SELECT  "ID" || ' - ' || "TITLE" AS "TASK",
+    				"PLANNED_EFFORT",
+    				ROUND("EFFORT" / "PLANNED_EFFORT" *100, 0) || ' % ' AS "USED_TIME",
+    				"COMPLETED" || ' % ' AS "COMPLETED"
+    	   FROM "TASKS";
+END;
