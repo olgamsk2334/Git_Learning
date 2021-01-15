@@ -1,0 +1,26 @@
+FUNCTION "F_CASE"( 
+					IV_ESTIMATED	INTEGER,
+				    IV_STATUS		INTEGER
+				)
+       RETURNS  TABLE(
+       				"TITLE"		NVARCHAR(50)
+       			    )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+	IF IV_STATUS <> 0 
+	THEN 
+		lt_titles = SELECT "TITLE" 
+		FROM   "PROJECTS"
+		WHERE "STATUS" = IV_STATUS;
+		 RETURN 
+			SELECT CASE 
+					WHEN :IV_ESTIMATED < 10 THEN  "TITLE" || ' - Small estimated. '
+					WHEN :IV_ESTIMATED > 10  AND :IV_ESTIMATED < 20 THEN  "TITLE" || ' - Immediatly estimated. '
+				    ELSE ("TITLE" || ' - High estimated. ')  	
+				   END
+			as "TITLE"
+			from :lt_titles;
+	END IF;
+END; 		
+	
