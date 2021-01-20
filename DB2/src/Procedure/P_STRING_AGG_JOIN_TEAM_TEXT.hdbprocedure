@@ -6,6 +6,7 @@ PROCEDURE "P_STRING_AGG_JOIN_TEAM_TEXT"(
    --DEFAULT SCHEMA <default_schema_name>
    READS SQL DATA AS
 BEGIN
+<<<<<<< HEAD
 	ET_RESULT = SELECT STRING_AGG("TEAM_TEXT"."TEAM_TEXT" || ' ( '
 														  || "U"."cnt"
 														  || ')',  ' , ') AS "TEAM_TEXT"
@@ -18,4 +19,8 @@ BEGIN
 				INNER JOIN "TEAM_TEXT"
 					ON "TEAM_TEXT"."ID" = "U"."TEAM"
 					WHERE "TEAM_TEXT"."LANGU" = 'DE';
+=======
+	ET_RESULT = SELECT STRING_AGG("TEAM_TEXT"., ' , ') AS "TEAM_TEXT"
+   
+>>>>>>> refs/heads/main
 END
