@@ -6,6 +6,7 @@ PROCEDURE "P_STRING_AGG_JOIN_TEAM_TEXT"(
    --DEFAULT SCHEMA <default_schema_name>
    READS SQL DATA AS
 BEGIN
+/*
 <<<<<<< HEAD
 	ET_RESULT = SELECT STRING_AGG("TEAM_TEXT"."TEAM_TEXT" || ' ( '
 														  || "U"."cnt"
@@ -23,4 +24,5 @@ BEGIN
 	ET_RESULT = SELECT STRING_AGG("TEAM_TEXT"., ' , ') AS "TEAM_TEXT"
    
 >>>>>>> refs/heads/main
+*/
 END
