@@ -1,5 +1,0 @@
-view default_num_type
-as select
-1/3 as "f",
-1.0/3.0 as "d"
-from "SYS.DUMMY"
