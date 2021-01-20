@@ -1,0 +1,21 @@
+PROCEDURE "P_STRING_AGG_JOIN_TEAM_TEXT"( 
+	OUT ET_RESULT TABLE (
+			             "TEAM_TEXT" NVARCHAR(200)))
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+	ET_RESULT = SELECT STRING_AGG("TEAM_TEXT"."TEAM_TEXT" || ' ( '
+														  || "U"."cnt"
+														  || ')',  ' , ') AS "TEAM_TEXT"
+				FROM (
+					SELECT "TEAM",
+							COUNT(*) AS "cnt"
+					FROM "USERS"
+					GROUP BY "TEAM"
+				) AS "U"
+				INNER JOIN "TEAM_TEXT"
+					ON "TEAM_TEXT"."ID" = "U"."TEAM"
+					WHERE "TEAM_TEXT"."LANGU" = 'DE';
+END

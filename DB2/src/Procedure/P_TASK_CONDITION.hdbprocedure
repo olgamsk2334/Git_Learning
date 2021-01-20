@@ -1,0 +1,37 @@
+PROCEDURE "P_TASK_CONDITION"(
+						OUT ET_RESULT TABLE (
+	                					"TITLE" NVARCHAR(40),
+			            				"STATUS" INTEGER,
+			            				"ID_PROJECT" INTEGER,
+			            				"PROJECT_MANAGER" INTEGER
+										
+						))
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   ET_RESULT = SELECT "T"."TITLE" AS "TITLE",
+						"T"."STATUS" AS "STATUS",
+						"P"."ID" AS "ID_PROJECT",
+						"P"."PROJECT_MANAGER" AS "PROJECT_MANAGER"
+				FROM "TASKS" AS "T"
+				LEFT JOIN "PROJECTS" AS "P" ON
+				"P"."ID" = "T"."PROJECT" --and
+				-- "T"."STATUS" > ANY(1, 3, 6) ;
+				 --where  "T"."STATUS" > 3;
+				-- "T"."STATUS" <> ALL (SELECT "ID" 
+									 -- FROM "STATUS"
+									 -- WHERE "IS_FINAL" = true);
+			--	where "T"."TITLE" NOT LIKE "%lorem%";
+			--where "T"."TITLE" LIKE '%est%' ESCAPE '%';
+			--  EXISTS  (select "STATUS" FROM "TASKS" where "STATUS" > 7);
+			;
+END
+
+
+
+
+
+
+
