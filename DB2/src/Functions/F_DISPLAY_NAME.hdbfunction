@@ -1,0 +1,34 @@
+FUNCTION "F_DISPLAY_NAME"( lv_first_name NVARCHAR(20),
+							lv_lastname NVARCHAR(20),
+							lv_middlename NVARCHAR(20))
+       RETURNS  rv_name  NVARCHAR(65)
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+   IF lv_first_name IS NOT NULL AND
+	  lv_lastname IS NOT NULL AND
+	  lv_middlename IS NOT NULL
+	THEN
+		DECLARE lv_initial NVARCHAR(1);
+		lv_initial = LEFT (lv_middlename, 1);
+		IF lv_initial<> ' '
+		THEN 
+			rv_name = lv_first_name || ' '|| 	lv_initial || ' ' || lv_lastname;
+		ELSE
+			rv_name = lv_first_name || ' ' || lv_lastname;
+		END IF;
+	ELSEIF lv_first_name IS NOT NULL AND
+			 lv_lastname IS NOT NULL 
+	THEN  
+		rv_name = lv_first_name || ' ' || lv_lastname;
+	ELSEIF lv_first_name IS NOT NULL 
+	THEN  
+		rv_name = lv_first_name ;
+	ELSEIF lv_lastname IS NOT NULL 
+	THEN  
+		rv_name = lv_lastname ;
+	ELSE
+		rv_name = ' ';
+	END IF;
+
+END;

@@ -1,0 +1,4 @@
+ COLUMN TABLE "CALCULATE"( 
+ 	"val"    DOUBLE 
+ 	 ) 
+ 	 COMMENT 'Numbers';

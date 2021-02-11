@@ -1,0 +1,27 @@
+FUNCTION "F_INDEX_BASED_PROJECTS"( )
+       RETURNS TABLE (
+       	    "TEXT"				NVARCHAR(140),
+       	    "indx"				 integer
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+Declare indx integer;
+
+declare ot_result TABLE (
+       	    "TEXT" NVARCHAR(140),
+       	    "indx" integer
+       );
+
+ lt_tasks =  Select TOP 10 * 
+				FROM "TASKS";
+	FOR indx IN 1..10 DO
+		 ot_result.("TEXT", "indx")[:indx] = (
+		 	:lt_tasks."PROJECT"[:indx] || ' - ' || :lt_tasks."TITLE"[:indx], 
+		 	:indx
+		 	);
+	END FOR;
+	
+RETURN  SELECT * FROM :ot_result;
+
+END;

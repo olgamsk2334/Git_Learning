@@ -1,0 +1,15 @@
+FUNCTION "F_LOOP_FOR"( iv_start_value INTEGER, iv_indx INTEGER )
+       RETURNS ev_result INTEGER
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+   DECLARE  lv_sum INTEGER = :iv_start_value ;
+   DECLARE indx INTEGER;
+    DECLARE lv_indx INTEGER = :iv_indx;
+   FOR indx IN 1..lv_indx DO
+		DECLARE lv_temp  INTEGER = :lv_sum;
+		lv_temp = :lv_temp + 5;
+		lv_sum = lv_temp;
+	END FOR;
+	ev_result = lv_sum;
+END;

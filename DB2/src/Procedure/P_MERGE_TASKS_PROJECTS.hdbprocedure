@@ -1,0 +1,40 @@
+PROCEDURE "P_MERGE_TASKS_PROJECTS"(
+	out et_project TABLE(
+			"ID"				INTEGER ,
+			"TITLE"				NVARCHAR(40),
+			"PROJECT_MANAGER"	INTEGER ,
+			"ESTIMATED_EFFORT"  INTEGER , 
+			"START_DATE"   		DATE , 
+			"STATUS"			INTEGER
+			))
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   AS
+BEGIN
+
+
+  MERGE INTO "PROJECTS" AS "P"
+	USING "USERS" AS "U"
+	 ON "P"."PROJECT_MANAGER" = "U"."ID"
+	 WHEN MATCHED THEN
+		UPDATE SET "P"."PROJECT_MANAGER" = "U"."ID",
+					"P"."ID" = "P"."ID" ,
+					"P"."TITLE" = "P"."TITLE" || '  UPDATE',
+					"P"."ESTIMATED_EFFORT" = "P"."ESTIMATED_EFFORT",
+					"P"."START_DATE" = "P"."START_DATE",
+					"P"."STATUS" = "P"."STATUS"
+	WHEN NOT MATCHED THEN	
+		INSERT VALUES(
+					("U"."ID"+15),
+					'INSERT New project',
+					"U"."ID",
+					25,
+					CURRENT_DATE,
+					1);
+	
+et_project = SELECT * 
+	FROM "PROJECTS";
+					
+					
+  
+END

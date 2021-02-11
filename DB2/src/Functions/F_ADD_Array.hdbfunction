@@ -1,0 +1,12 @@
+FUNCTION "F_ADD_Array"(iv_i integer )
+       RETURNS 	ev_demo varchar(20) ARRAY
+              LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    Declare I INT;
+    FOR i IN 1..:iv_i DO
+    	ev_demo[:i] = concat('value', :i);
+    END FOR;
+    
+  return  ev_demo[3];
+END;

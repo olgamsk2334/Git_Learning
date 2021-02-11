@@ -1,0 +1,27 @@
+PROCEDURE "P_SEARCH_TASK"( 
+	out ot_result TABLE (
+		"ID"		INT,
+		"STATUS"	INT,
+		"ASSIGNEE"	INT,
+		"TITLE"		NVARCHAR(50)
+	)
+)
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   READS SQL DATA AS
+BEGIN
+   Declare lv_index INT = 0;
+   ot_result = SELECT "ID",
+					"STATUS",
+					"ASSIGNEE",
+					"TITLE"
+				FROM "TASKS"
+				ORDER BY "ID";
+				
+	lv_index = :ot_result.SEARCH(("STATUS", "ASSIGNEE"), (3,3));
+	:ot_result.DELETE(lv_index);
+	:ot_result.DELETE(:ot_result.SEARCH(("STATUS", "ASSIGNEE"), (3,1)));
+	
+   
+END

@@ -1,0 +1,31 @@
+PROCEDURE "P_UPSERT_PROJECT"(
+	out et_project TABLE(
+			"ID"				INTEGER ,
+			"TITLE"				NVARCHAR(40),
+			"PROJECT_MANAGER"	INTEGER ,
+			"ESTIMATED_EFFORT"  INTEGER , 
+			"START_DATE"   		DATE , 
+			"STATUS"			INTEGER
+	))
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   AS
+BEGIN
+
+ UPSERT "PROJECTS" ("ID", "TITLE", "PROJECT_MANAGER","ESTIMATED_EFFORT", "START_DATE", "STATUS" )  
+				SELECT "ID"	,
+						"TITLE" || 'rel. 1.0'	,
+						"PROJECT_MANAGER",
+						"ESTIMATED_EFFORT" + 5 , 
+						ADD_YEARS ("START_DATE", 2),
+						"STATUS"
+				FROM "PROJECTS" 
+				WHERE "ID" = 1;
+	et_project = select * 
+				FROM "PROJECTS"
+					WHERE "ID" <4;
+				
+				
+				
+END

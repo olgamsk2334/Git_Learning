@@ -1,0 +1,12 @@
+FUNCTION "F_LOOP_WHILE"( iv_value INTEGER )
+       RETURNS ev_result INTEGER 
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    DECLARE lv_counter INTEGER = 1;
+    ev_result = 3;
+    WHILE lv_counter <= :iv_value  DO
+	    ev_result = ev_result * lv_counter;
+	    lv_counter = lv_counter + 1;
+	END WHILE;
+END;
