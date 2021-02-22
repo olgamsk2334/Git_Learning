@@ -24,6 +24,10 @@ body += `Find Last occurance of the letter A: ${demo1.lastIndexOf("A").toString(
 
 body += `Replace with XS: ${demo1.replace("Extended Application Services", "XS")} </p>`;
 
+var es6 = "ES6!" ;
+body +=`Template Literals in ${es6} `+ "</p>";
+
+body +=`Multi-line string </br> second line </p>`;
 
 
 $.response.status = $.net.http.OK;
