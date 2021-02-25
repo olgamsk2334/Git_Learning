@@ -1,41 +1,24 @@
 ID: Git_Learning
 _schema-version: '2.1'
 version: 0.0.1
-
 modules:
- - name: DB2
-   type: hdb
-   path: DB2
-   requires:
-    - name: hdi_DB2_2
-
- 
-
- 
-
-
- - name: xsjs
-   type: nodejs
-   path: xsjs
-   provides:
-    - name: xsjs_api
-      properties:
-         url: ${default-url}
-
+  - name: DB2
+    type: hdb
+    path: DB2
+    requires:
+      - name: hdi_DB
+  - name: xsjs
+    type: nodejs
+    path: xsjs
+    provides:
+      - name: xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: hdi_DB
+      - name: DB2
 resources:
- - name: hdi_DB2
-   properties:
-      hdi-container-name: ${service-name}
-   type: com.sap.xs.hdi-container
-
- - name: hdi_Tasks
-   properties:
-      hdi-container-name_2: ${service-name}
-   type: com.sap.xs.hdi-container
-
-
- - name: hdi_DB2_2
-   properties:
-      hdi-container-name_3: ${service-name}
-   type: com.sap.xs.hdi-container
-
+  - name: hdi_DB
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
