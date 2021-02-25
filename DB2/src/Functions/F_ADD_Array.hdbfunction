@@ -8,5 +8,5 @@ BEGIN
     	ev_demo[:i] = concat('value', :i);
     END FOR;
     
-  return  ev_demo[3];
+  --ev_demo =  ev_demo[3];
 END;

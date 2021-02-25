@@ -31,7 +31,7 @@ function classes() {
 	class ColorsTable {
 		constructor(ID) {
 			var conn = $.db.getConnection();
-			var pstmt;
+			var prepareStat;
 			var rs;
 			var query;
 			
@@ -39,14 +39,15 @@ function classes() {
 					 FROM "COLORS"
 					 WHERE "ID" =  ?`;
 			prepareStat = conn.prepareStatement(query);
+			//Устанавливает целочисленный параметр,начиная с 1-го
 			prepareStat.setInteger(1,ID);
 			rs = prepareStat.executeQuery();
 			// перебор значений, полученных в результате запроса
-			while(rs.next) {
+			while(rs.next()) {
 				// возвращает значение указанного столбца, 1-й столбец типа Integer
 				this.ID = rs.getInteger(1);
-				// возвращает значение указанного столбца, 2-й столбец типа nvarchar
-				this.Color = rs.getNString(2);
+				// возвращает значение указанного столбца, 3-й столбец типа nvarchar
+				this.Number = rs.getNString(3);
 			}
 			rs.close();
 			prepareStat.close();
@@ -54,9 +55,8 @@ function classes() {
 		}
 	
 	
-	var col = new ColorsTable(2);
-	body +=`ColorsTable: ${COLORS.ID} </p>`;
-	
+	var col = new ColorsTable(4);
+	body +=`<span style="color: ${col.Number}">ColorsTable from DB ${col.Number}</span> </p>`;
 	$.response.status = $.net.http.OK;
 	$.response.contentType = "text/html";
 	$.response.setBody(body);
