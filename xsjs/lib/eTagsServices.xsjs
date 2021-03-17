@@ -10,7 +10,6 @@ function readColors(){
 		var	color = res[0].COLOR;
 		resBody.readColors = color.toString();
 	}
-	}
 	catch(err){
 		$.response.status = $.net.http.INTERNAL_SERVER_ERROR;
 		$.response.setBody("Error in READ");
