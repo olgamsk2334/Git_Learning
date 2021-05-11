@@ -2,7 +2,7 @@
 	"format_version": 1,
 	"imports": [
 		{
-		"target_table": "MESSAGES",
+		"target_table": "MSG.MSG",
 		"source_data": {
 		"data_type": "CSV",
 		"file_name": "messages.csv",

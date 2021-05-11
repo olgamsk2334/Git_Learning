@@ -1,0 +1,33 @@
+type BusinessKey : Integer64;
+type CurrencyT : String(3);
+type AmountT : Decimal(15,2);
+type QuantityT : Decimal(13,2);
+type UnitT : String(13);
+
+@OData.publish : true
+/*@@layout{"layoutInfo":{"x":-128,"y":-137.5}}*/
+context ITEM {
+    /*@@layout{"layoutInfo":{"x":-56.6689453125,"y":-304,"external":[{"id":"BusinessKey","sourceName":"NOTEID","x":-498.6689453125,"y":-373},{"id":"CurrencyT","sourceName":"CURRENCY","x":-498.6689453125,"y":-290},{"id":"AmountT","sourceName":"GROSSAMOUNT","x":-476.6689453125,"y":-219},{"id":"AmountT","sourceName":"NETAMOUNT"},{"id":"AmountT","sourceName":"TAXAMOUNT"},{"id":"QuantityT","sourceName":"QUANTITY","x":-476.6689453125,"y":-148},{"id":"UnitT","sourceName":"QUANTITYUNIT","x":-490.6689453125,"y":-88}]}}*/
+    entity Items {
+        key NOTEID       : BusinessKey;
+            CURRENCY     : CurrencyT;
+            GROSSAMOUNT  : AmountT;
+            NETAMOUNT    : AmountT;
+            TAXAMOUNT    : AmountT;
+            QUANTITY     : QuantityT;
+            QUANTITYUNIT : UnitT;
+    }
+    define /*@@layout{"layoutInfo":{"x":-447.3310546875,"y":2}}*/
+    /*@@layout{"layoutInfo":{"x":-57.3310546875,"y":-97}}*/
+    view ItemView as
+        select from Items
+        {
+            NOTEID,
+            CURRENCY,
+            GROSSAMOUNT,
+            NETAMOUNT,
+            TAXAMOUNT,
+            QUANTITY,
+            QUANTITYUNIT
+        };
+};

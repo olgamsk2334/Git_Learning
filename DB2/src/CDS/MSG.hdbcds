@@ -1,0 +1,24 @@
+/*@@layout{"layoutInfo":{"x":-56.0078125,"y":-99.5}}*/
+    type TMESSAGECLASS : String(20);
+    type TMESSAGENUMBER : String(3);
+    type TLANGUAGE : String(2);
+    type TDESCRIPTION : String(255);
+    type TTEXT : String(500);
+context MSG {
+    type TMESSAGECLASS : String(20);
+    type TMESSAGENUMBER : String(3);
+    type TLANGUAGE : String(2);
+    type TDESCRIPTION : String(255);
+    type TTEXT : String(500);
+
+    entity MSG {
+        key "MESSAGECLASS"  : TMESSAGECLASS;
+        key "MESSAGENUMBER" : TMESSAGENUMBER;
+        key "LANGUAGE"      : TLANGUAGE;
+            "DESCRIPTION"   : TDESCRIPTION;
+            "TEXT"          : TTEXT;
+    }
+};
+
+/*@@layout{"layoutInfo":{"x":-614.5,"y":-140}}*/
+type aaaa : String(80);
